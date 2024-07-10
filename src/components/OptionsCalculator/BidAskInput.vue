@@ -149,9 +149,16 @@ input[type='text']:disabled {
 
 span {
   font-size: 14px;
+  color: var(--red-dark);
+  font-weight: 100;
   padding-right: 3px;
   :nth-child(1) {
     padding-left: 7px;
+  }
+}
+.call {
+  span {
+    color: var(--green-dark);
   }
 }
 @media screen and (max-width: 640px) {
