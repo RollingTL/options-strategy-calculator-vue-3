@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import OptionsList from '@/components/OptionsCalculator/OptionsList.vue'
+import OptionsGraph from '@/components/OptionsCalculator/OptionsGraph.vue'
 
 import { ref, onUpdated } from 'vue'
 
@@ -97,12 +98,7 @@ onUpdated(() => {
           @update-bid="updateBid"
           @update-ask="updateAsk"
         />
-        <div class="info">
-          <pre>
-          {{ optionsData }}
-        </pre
-          >
-        </div>
+        <OptionsGraph :checked-options-data="optionsData" />
       </div>
       <div class="warning" v-else>Invalid data!</div>
     </div>
