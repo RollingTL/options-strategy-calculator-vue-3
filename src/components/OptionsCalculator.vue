@@ -70,7 +70,14 @@ const updateStrikePrice = (newValue: number, index: number) => {
   console.log('----', newValue, index)
   optionsData.value[index].strike_price = newValue
 }
-
+const updateBid = (newValue: number, index: number) => {
+  console.log('----', newValue, index)
+  optionsData.value[index].bid = newValue
+}
+const updateAsk = (newValue: number, index: number) => {
+  console.log('----', newValue, index)
+  optionsData.value[index].ask = newValue
+}
 onUpdated(() => {
   console.log('updated() OC')
 })
@@ -87,6 +94,8 @@ onUpdated(() => {
           @swap-call-put="toggleCallPut"
           @swap-long-short="toggleLongShort"
           @update-strike-price="updateStrikePrice"
+          @update-bid="updateBid"
+          @update-ask="updateAsk"
         />
         <div class="info">
           <pre>

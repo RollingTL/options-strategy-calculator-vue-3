@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { onUpdated } from 'vue'
+// import { onUpdated } from 'vue'
 
 import PriceInput from '@/components/OptionsCalculator/PriceInput.vue'
+import BidAskInput from '@/components/OptionsCalculator/BidAskInput.vue'
+
 const props = defineProps<{
   optionsData: OptionData[]
 }>()
 
 const emit = defineEmits([
   'update-strike-price',
+  'update-bid',
+  'update-ask',
   'option-clicked',
   'swap-call-put',
   'swap-long-short'
@@ -16,10 +20,12 @@ const emit = defineEmits([
 const emitUpdateStrikePrice = (newPrice: number, index: number) => {
   emit('update-strike-price', newPrice, index)
 }
-
-onUpdated(() => {
-  console.log('updated() OL')
-})
+const emitUpdateBid = (newBid: number, index: number) => {
+  emit('update-bid', newBid, index)
+}
+const emitUpdateAsk = (newAsk: number, index: number) => {
+  emit('update-ask', newAsk, index)
+}
 </script>
 
 <template>
@@ -43,6 +49,7 @@ onUpdated(() => {
         <td class="strike">
           <PriceInput
             :price="item.strike_price.toString()"
+            :readonly="!item.checked"
             @update:price="(newPrice) => emitUpdateStrikePrice(newPrice, index)"
           />
         </td>
@@ -59,8 +66,16 @@ onUpdated(() => {
             {{ item.long_short }}
           </button>
         </td>
-        <td class="bid"><span class="bid-ask">Bid:</span> {{ item.bid.toFixed(2) }}</td>
-        <td class="ask"><span class="bid-ask">Ask:</span> {{ item.ask.toFixed(2) }}</td>
+        <td class="bid-ask">
+          <BidAskInput
+            :bid="item.bid.toString()"
+            @update:bid="(newBid) => emitUpdateBid(newBid, index)"
+            :ask="item.ask.toString()"
+            @update:ask="(newAsk) => emitUpdateAsk(newAsk, index)"
+            :readonly="!item.checked"
+          />
+        </td>
+
         <td class="right">
           <input
             type="checkbox"
@@ -119,18 +134,13 @@ td.type {
   /* font-weight: 500; */
 }
 td.strike,
-td.bid,
-td.ask {
+td.bid-ask {
   width: 7%;
 }
 td.long-short {
   width: 14%;
 }
 
-td.bid .bid-ask,
-td.ask .bid-ask {
-  font-size: 14px;
-}
 td.right {
   width: 14%;
   text-align: right;
@@ -146,9 +156,12 @@ tr.off td {
   table {
     font-size: 12px;
   }
-  td.bid .bid-ask,
-  td.ask .bid-ask {
-    display: none;
+  td.type {
+    padding-left: 12px;
+  }
+
+  td.right {
+    padding-right: 12px;
   }
 }
 .button-round {
@@ -157,6 +170,9 @@ tr.off td {
   line-height: 1.4;
   padding: 0 11px;
   text-transform: capitalize;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
 .button-round.call {
   color: var(--green-dark);
@@ -210,8 +226,8 @@ input[type='checkbox'] {
   box-sizing: border-box;
   width: 20px;
   height: 20px;
-  margin: 1px;
-  padding: 3px;
+  margin: 0;
+  padding: 0;
   border: 1px solid var(--primary-gray);
   border-radius: 5px;
   appearance: none;
@@ -224,7 +240,6 @@ input[type='checkbox']:checked {
   background-size: 12px; /* Adjust this size to control the size of the SVG */
   background-position: center;
   background-repeat: no-repeat;
-  padding: 2px;
 }
 
 input[type='checkbox']:not(:disabled):checked {
@@ -246,6 +261,20 @@ input[type='checkbox']:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   input[type='checkbox'] {
     transition: none;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .button-round {
+    font-size: 12px;
+  }
+  input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+  }
+  input[type='checkbox']:checked {
+    background-size: 9px; /* Adjust this size to control the size of the SVG */
   }
 }
 </style>
