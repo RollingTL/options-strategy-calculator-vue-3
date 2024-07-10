@@ -1,0 +1,42 @@
+:root {
+  --primary-text-color: hsl(210, 27%, 24%);
+  --primary-text-lighter: hsl(210, 29%, 34%);
+  --primary-text-lighter-2: hsl(210, 22%, 54%);
+
+  --primary-gray: hsla(210, 19%, 69%, 1);
+  --primary-gray-lighter: hsla(210, 19%, 79%, 1);
+  --primary-gray-lighter-2: hsla(210, 19%, 89%, 1);
+  --primary-gray-darker: hsla(210, 19%, 59%, 1);
+
+  --primary-background-light: hsla(210, 29%, 94%, 1);
+
+  --primary-text-disabled: hsla(210, 19%, 34%, 0.2);
+  --primary-background-disabled: hsla(210, 19%, 100%, 0.5);
+
+  --tab-hover-color: hsla(210, 59%, 69%, 1);
+
+  --green-text: hsla(170, 80%, 29%, 1);
+  --red-text: hsla(344, 80%, 39%, 1);
+
+  --green-light: hsla(170, 94%, 46%, 0.1);
+  --red-light: hsla(344, 100%, 59%, 0.1);
+
+  --green-dark: hsla(170, 34%, 26%, 1);
+  --red-dark: hsla(344, 30%, 29%, 1);
+
+  --green-light-accent: hsla(160, 64%, 87%, 1);
+  --red-light-accent: hsla(354, 70%, 92%, 1);
+
+  /* --green-light-accent: hsla(170, 94%, 46%, 0.1);
+  --red-light-accent: hsla(344, 100%, 59%, 0.1); */
+
+  --green-medium: hsla(170, 34%, 76%, 1);
+  --red-medium: hsla(344, 30%, 79%, 1);
+
+  --warning-color: rgb(223, 42, 100);
+
+  /* Markers in arrow buttons and checkboxes*/
+  /* convert below color to to svg %____ and change fill color in svg */
+  --marker-color-hsla: hsla(210, 79%, 39%, 1);
+  --marker-color-rgb: rgb(15, 104, 193);
+}
