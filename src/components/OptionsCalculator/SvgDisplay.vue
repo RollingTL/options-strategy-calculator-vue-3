@@ -3,10 +3,10 @@ import ProfitScale from '@/components/OptionsCalculator/ProfitScale.vue'
 import PriceScale from '@/components/OptionsCalculator/PriceScale.vue'
 import ProfitLine from '@/components/OptionsCalculator/ProfitLine.vue'
 
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 
 const props = defineProps<{
-  checkedOptionsData: OptionData[]
+  checkedOptionsData: OptionData
   containerWidth: number
   containerHeight: number
   priceStep: number
@@ -15,11 +15,11 @@ const props = defineProps<{
   priceCurrentScale: number
 }>()
 
-const paddingX = 60
-const paddingY = 90
+const paddingX = ref(60)
+const paddingY = ref(90)
 
-const width = computed(() => props.containerWidth - 2 * paddingX)
-const height = computed(() => props.containerHeight - 2 * paddingY)
+const width = computed(() => props.containerWidth - 2 * paddingX.value)
+const height = computed(() => props.containerHeight - 2 * paddingY.value)
 
 const priceAverageValue = computed(() => {
   const checkedOptions = props.checkedOptionsData.filter((option) => option.checked === true)
@@ -29,7 +29,7 @@ const priceAverageValue = computed(() => {
 
 const priceScaleData = computed(() => {
   const dollarsPerScaleLine = props.priceStep / props.priceCurrentScale
-  const lines = []
+  const lines: PriceScaleData = []
   const centerX = width.value / 2
   const centerPrice = priceAverageValue.value
 
@@ -76,7 +76,7 @@ const priceScaleData = computed(() => {
 })
 
 const profitScaleData = computed(() => {
-  const lines = []
+  const lines: ProfitScaleData = []
   lines.push({
     profit: 0,
     height: height.value / 2

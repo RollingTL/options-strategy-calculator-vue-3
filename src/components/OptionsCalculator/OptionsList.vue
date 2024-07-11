@@ -5,7 +5,7 @@ import PriceInput from '@/components/OptionsCalculator/PriceInput.vue'
 import BidAskInput from '@/components/OptionsCalculator/BidAskInput.vue'
 
 const props = defineProps<{
-  optionsData: OptionData[]
+  optionsData: OptionData
 }>()
 
 const emit = defineEmits([

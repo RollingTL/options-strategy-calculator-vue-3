@@ -4,7 +4,7 @@ import OptionsGraph from '@/components/OptionsCalculator/OptionsGraph.vue'
 
 import { ref, onUpdated } from 'vue'
 
-const sampleData: OptionData[] = [
+const sampleData: OptionData = [
   {
     strike_price: 100,
     type: 'Call',
@@ -39,7 +39,7 @@ const sampleData: OptionData[] = [
   }
 ]
 
-const optionsData = ref<OptionData[]>(sampleData)
+const optionsData = ref<OptionData>(sampleData)
 
 const toggleChecked = (index: number) => {
   if (optionsData.value[index]) {

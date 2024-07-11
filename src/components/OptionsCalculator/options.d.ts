@@ -5,4 +5,13 @@ type OptionData = {
   ask: number
   long_short: 'long' | 'short'
   checked: boolean
-}
+}[]
+type ProfitScaleData = {
+  profit: number
+  height: number
+}[]
+type PriceScaleData = {
+  price: number
+  x: number
+  index: number
+}[]

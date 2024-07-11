@@ -1,3 +1,17 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+defineProps<{
+  width: number
+  height: number
+  paddingX: number
+  paddingY: number
+  profitScaleData: ProfitScaleData
+}>()
+
+const numberPadding = ref(8)
+</script>
+
 <template>
   <g>
     <!-- Profit lines and text above zero -->
@@ -42,20 +56,6 @@
     />
   </g>
 </template>
-
-<script setup>
-const { defineProps } = Vue
-
-const props = defineProps({
-  width: Number,
-  height: Number,
-  paddingX: Number,
-  paddingY: Number,
-  profitScaleData: Array
-})
-
-const numberPadding = 8
-</script>
 
 <style scoped>
 .svg-zero-profit-line {

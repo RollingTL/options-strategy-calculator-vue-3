@@ -3,7 +3,7 @@ import { ref, computed, onMounted, onBeforeUnmount, type Ref } from 'vue'
 import SvgDisplay from '@/components/OptionsCalculator/SvgDisplay.vue'
 
 const props = defineProps<{
-  checkedOptionsData: OptionData[]
+  checkedOptionsData: OptionData
 }>()
 const container: Ref<HTMLElement | null> = ref(null)
 const containerWidth = ref(300)

@@ -1,3 +1,24 @@
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+
+const props = defineProps<{
+  width: number
+  height: number
+  paddingX: number
+  paddingY: number
+  priceCurrentScale: number
+  priceScaleData: PriceScaleData
+}>()
+
+const numberPadding = ref(8)
+
+const innerPriceScaleData = computed(() => {
+  if (props.priceScaleData[0].price === 0)
+    return props.priceScaleData.slice(0, props.priceScaleData.length - 1)
+  else return props.priceScaleData.slice(1, props.priceScaleData.length - 1)
+})
+</script>
+
 <template>
   <g>
     <line
@@ -31,27 +52,6 @@
     </g>
   </g>
 </template>
-
-<script setup>
-const { defineProps } = Vue
-
-const props = defineProps({
-  width: Number,
-  height: Number,
-  paddingX: Number,
-  paddingY: Number,
-  priceCurrentScale: Number,
-  priceScaleData: Array
-})
-
-const numberPadding = 8
-
-const innerPriceScaleData = computed(() => {
-  if (props.priceScaleData[0].price === 0)
-    return props.priceScaleData.slice(0, props.priceScaleData.length - 1)
-  else return props.priceScaleData.slice(1, props.priceScaleData.length - 1)
-})
-</script>
 
 <style scoped>
 .svg-price-line {
