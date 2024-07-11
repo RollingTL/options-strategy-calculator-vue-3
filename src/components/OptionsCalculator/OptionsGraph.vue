@@ -10,9 +10,9 @@ const containerWidth = ref(300)
 const containerHeight = ref(480)
 const profitStep = ref(20) // pixels
 const profitScaleArray = ref([40, 20, 10, 4, 2, 1])
-const profitCurrentScale = ref(2) // one profit dollar is equal to profitCurrentScale pixels
-const priceStep = ref(40) // pixels
-const priceScaleArray = ref([40, 20, 8, 4, 2])
+const profitCurrentScale = ref(4) // one profit dollar is equal to profitCurrentScale pixels
+const priceStep = ref(20) // pixels
+const priceScaleArray = ref([40, 20, 8, 4, 2, 1])
 const priceCurrentScale = ref(4) // one profit dollar is equal to profitCurrentScale pixels
 
 const showGraph = computed(() => {
