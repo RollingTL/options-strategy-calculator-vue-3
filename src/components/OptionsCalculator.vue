@@ -2,7 +2,7 @@
 import OptionsList from '@/components/OptionsCalculator/OptionsList.vue'
 import OptionsGraph from '@/components/OptionsCalculator/OptionsGraph.vue'
 
-import { ref, onUpdated } from 'vue'
+import { ref } from 'vue'
 
 const sampleData: OptionData = [
   {
@@ -68,20 +68,14 @@ const toggleLongShort = (index: number) => {
 }
 
 const updateStrikePrice = (newValue: number, index: number) => {
-  console.log('----', newValue, index)
   optionsData.value[index].strike_price = newValue
 }
 const updateBid = (newValue: number, index: number) => {
-  console.log('----', newValue, index)
   optionsData.value[index].bid = newValue
 }
 const updateAsk = (newValue: number, index: number) => {
-  console.log('----', newValue, index)
   optionsData.value[index].ask = newValue
 }
-onUpdated(() => {
-  console.log('updated() OC')
-})
 </script>
 
 <template>

@@ -30,25 +30,26 @@ const innerPriceScaleData = computed(() => {
       :y2="height + paddingY"
       class="svg-price-line"
     />
-    <g v-for="line in innerPriceScaleData" :key="`text-up-${line.price}`">
-      <text
-        :x="line.x + paddingX"
-        :y="paddingY - numberPadding"
-        class="svg-text"
-        text-anchor="middle"
-      >
-        {{ line.price }}
-      </text>
-    </g>
-    <g v-for="line in innerPriceScaleData" :key="`text-down-${line.price}`">
-      <text
-        :x="line.x + paddingX"
-        :y="paddingY + height + 12 + numberPadding"
-        class="svg-text"
-        text-anchor="middle"
-      >
-        {{ line.price }}
-      </text>
+    <g v-for="(line, index) in innerPriceScaleData" :key="`text-${line.price}`">
+      <g v-if="index % 3 == 0">
+        <text
+          :x="line.x + paddingX"
+          :y="paddingY - numberPadding"
+          class="svg-text"
+          text-anchor="middle"
+        >
+          {{ line.price }}
+        </text>
+
+        <text
+          :x="line.x + paddingX"
+          :y="paddingY + height + 12 + numberPadding"
+          class="svg-text"
+          text-anchor="middle"
+        >
+          {{ line.price }}
+        </text>
+      </g>
     </g>
   </g>
 </template>

@@ -71,6 +71,7 @@ const pathDataTop = computed(() => {
   let pathData = `M ${thePoints[0].x} ${thePoints[0].y}`
   for (let i = 1; i < thePoints.length; i++) pathData += ` L ${thePoints[i].x} ${thePoints[i].y}`
   pathData += ` L ${thePoints[thePoints.length - 1].x} ${props.height / 2 + 10} L ${thePoints[0].x} ${props.height / 2 + 10}`
+
   return pathData
 })
 
@@ -80,6 +81,7 @@ const pathDataBottom = computed(() => {
   let pathData = `M ${thePoints[0].x} ${thePoints[0].y}`
   for (let i = 1; i < thePoints.length; i++) pathData += ` L ${thePoints[i].x} ${thePoints[i].y}`
   pathData += ` L ${thePoints[thePoints.length - 1].x} ${props.height / 2 - 10} L ${thePoints[0].x} ${props.height / 2 - 10}`
+
   return pathData
 })
 

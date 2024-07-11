@@ -21,17 +21,22 @@ const paddingY = ref(90)
 const width = computed(() => props.containerWidth - 2 * paddingX.value)
 const height = computed(() => props.containerHeight - 2 * paddingY.value)
 
-const priceAverageValue = computed(() => {
-  const checkedOptions = props.checkedOptionsData.filter((option) => option.checked === true)
-  const totalStrikePrice = checkedOptions.reduce((sum, option) => sum + option.strike_price, 0)
-  return totalStrikePrice / checkedOptions.length
+const averageOfMinMaxStrikePrices = computed(() => {
+  const checkedOptions = props.checkedOptionsData.filter((option) => option.checked)
+  if (checkedOptions.length === 0) {
+    return 0 // Return 0 if there are no checked options
+  }
+  const strikePrices = checkedOptions.map((option) => option.strike_price)
+  const minStrikePrice = Math.min(...strikePrices)
+  const maxStrikePrice = Math.max(...strikePrices)
+  return (minStrikePrice + maxStrikePrice) / 2
 })
 
 const priceScaleData = computed(() => {
   const dollarsPerScaleLine = props.priceStep / props.priceCurrentScale
   const lines: PriceScaleData = []
   const centerX = width.value / 2
-  const centerPrice = priceAverageValue.value
+  const centerPrice = averageOfMinMaxStrikePrices.value
 
   let closestPrice = Math.floor(centerPrice / dollarsPerScaleLine) * dollarsPerScaleLine
   let closestX = centerX - (centerPrice - closestPrice) * props.priceCurrentScale

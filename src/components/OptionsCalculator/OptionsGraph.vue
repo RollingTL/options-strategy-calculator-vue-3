@@ -9,10 +9,10 @@ const container: Ref<HTMLElement | null> = ref(null)
 const containerWidth = ref(300)
 const containerHeight = ref(480)
 const profitStep = ref(20) // pixels
-const profitScaleArray = ref([40, 20, 10, 4, 2, 1])
+const profitScaleArray = ref([160, 80, 40, 20, 10, 4, 2, 1, 0.5])
 const profitCurrentScale = ref(4) // one profit dollar is equal to profitCurrentScale pixels
 const priceStep = ref(20) // pixels
-const priceScaleArray = ref([40, 20, 8, 4, 2, 1])
+const priceScaleArray = ref([160, 80, 40, 20, 10, 4, 2, 1, 0.5])
 const priceCurrentScale = ref(4) // one profit dollar is equal to profitCurrentScale pixels
 
 const showGraph = computed(() => {
