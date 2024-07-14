@@ -41,7 +41,6 @@ const copyToClipboard = async () => {
     await navigator.clipboard.writeText(fullUrl.value)
     alert('URL copied to clipboard')
   } catch (err) {
-    console.error('Failed to copy URL: ', err)
     alert('Failed to copy URL')
   }
 }
@@ -54,7 +53,6 @@ function getOptionDataFromURL() {
       const jsonData = atob(encodedData) // base64 decode
       return JSON.parse(jsonData)
     } catch (error) {
-      console.error('Failed to decode or parse option data from URL', error)
       return null
     }
   }
