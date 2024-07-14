@@ -19,7 +19,7 @@
   --red-text: hsla(344, 80%, 39%, 1);
 
   --green-light: hsla(170, 94%, 46%, 0.1);
-  --red-light: hsla(344, 100%, 59%, 0.1);
+  --red-light: hsla(354, 100%, 59%, 0.1);
 
   --green-dark: hsla(170, 44%, 31%, 1);
   --red-dark: hsla(344, 30%, 33%, 1);
@@ -38,5 +38,5 @@
   /* Markers in arrow buttons and checkboxes*/
   /* convert below color to to svg %____ and change fill color in svg */
   --marker-color-hsla: hsla(210, 79%, 39%, 1);
-  --marker-color-rgb: rgb(15, 104, 193);
+  --marker-color-rgb: #4d7ee0;
 }
