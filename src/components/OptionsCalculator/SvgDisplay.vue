@@ -18,7 +18,7 @@ const props = defineProps<{
 }>()
 
 const paddingX = 60
-const paddingY = 90
+const paddingY = 30
 
 const width = computed(() => props.containerWidth - 2 * paddingX)
 const height = computed(() => props.containerHeight - 2 * paddingY)
@@ -88,7 +88,7 @@ const maxProfitLossData = computed(() => {
   let maxLoss = Math.min(...losses)
   if (maxLoss < -100000) maxLoss = Infinity
 
-  return { maxProfit: maxProfit, maxLoss: maxLoss }
+  return { maxProfit: parseFloat(maxProfit.toFixed(3)), maxLoss: parseFloat(maxLoss.toFixed(3)) }
 })
 
 const breakPointsData = computed(() => {
@@ -295,12 +295,12 @@ function calculateProfit(price: number, optionsData: OptionData) {
   text-align: left;
   padding: 1rem 2rem;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   .column {
     .text-label {
       font-size: 12px;
       color: var(--primary-text-lighter);
-      padding-bottom: 2px;
+      padding-bottom: 7px;
       @media screen and (max-width: 640px) {
         font-size: 10px;
       }
@@ -309,23 +309,26 @@ function calculateProfit(price: number, optionsData: OptionData) {
       font-size: 18px;
       color: var(--green-text);
       @media screen and (max-width: 640px) {
-        font-size: 14px;
+        font-size: 16px;
       }
     }
     .loss-value {
       font-size: 18px;
       color: var(--red-text);
       @media screen and (max-width: 640px) {
-        font-size: 14px;
+        font-size: 16px;
       }
     }
     .points-value {
       font-size: 18px;
       color: var(--primary-text-lighter);
       @media screen and (max-width: 640px) {
-        font-size: 14px;
+        font-size: 16px;
       }
     }
+  }
+  @media screen and (max-width: 640px) {
+    padding: 0.6em 1rem;
   }
 }
 </style>

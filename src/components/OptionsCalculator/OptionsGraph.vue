@@ -10,10 +10,10 @@ const containerWidth = ref(300)
 const containerHeight = ref(480)
 const profitStep = 20 // pixels
 const profitScaleArray = [160, 80, 40, 20, 10, 4, 2, 1, 0.5]
-const profitCurrentScale = ref(4) // one profit dollar is equal to profitCurrentScale pixels
+const profitCurrentScale = ref(2) // one profit dollar is equal to profitCurrentScale pixels
 const priceStep = 20 // pixels
 const priceScaleArray = [160, 80, 40, 20, 10, 4, 2, 1, 0.5]
-const priceCurrentScale = ref(4) // one profit dollar is equal to profitCurrentScale pixels
+const priceCurrentScale = ref(2) // one profit dollar is equal to profitCurrentScale pixels
 
 const showGraph = computed(() => {
   return props.checkedOptionsData.some((item) => item.checked === true)
@@ -121,12 +121,12 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .display-container {
-  padding-top: 1.6rem;
+  padding-top: 2rem;
 }
 .button-holder {
   display: flex;
   column-gap: 2rem;
-  margin-top: -3rem;
+
   padding: 0 60px 24px 60px;
   justify-content: flex-end;
   flex-wrap: wrap;

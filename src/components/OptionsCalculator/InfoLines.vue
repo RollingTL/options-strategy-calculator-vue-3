@@ -86,6 +86,6 @@ const zeroPoint = computed(() => {
 }
 .strike-line {
   stroke: var(--primary-text-lighter-2);
-  stroke-width: 0.5;
+  stroke-width: 0.8;
 }
 </style>
