@@ -98,9 +98,10 @@ h1 {
 .calculator {
   max-width: 960px;
   margin: auto;
+  margin-bottom: 2rem;
   box-shadow:
-    0 0 5px rgba(0, 0, 0, 0.1),
-    0 0 20px rgba(0, 0, 0, 0.1);
+    0 0 5px var(--shadow-narrow),
+    0 0 20px var(--shadow-wide);
   border-radius: 1rem;
   padding-bottom: 1rem;
   /* padding-top: 1rem; */
