@@ -156,9 +156,15 @@ span {
     padding-left: 7px;
   }
 }
+
 .call {
   span {
     color: var(--green-dark);
+  }
+}
+.off {
+  span {
+    color: var(--primary-text-disabled);
   }
 }
 @media screen and (max-width: 640px) {
