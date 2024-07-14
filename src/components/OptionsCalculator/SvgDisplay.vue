@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ProfitScale from '@/components/OptionsCalculator/ProfitScale.vue'
 import PriceScale from '@/components/OptionsCalculator/PriceScale.vue'
-// import ProfitLine from '@/components/OptionsCalculator/ProfitLine.vue'
 import InfoLines from '@/components/OptionsCalculator/InfoLines.vue'
 import GraphLine from '@/components/OptionsCalculator/GraphLine.vue'
 
