@@ -2,6 +2,7 @@
 import ProfitScale from '@/components/OptionsCalculator/ProfitScale.vue'
 import PriceScale from '@/components/OptionsCalculator/PriceScale.vue'
 // import ProfitLine from '@/components/OptionsCalculator/ProfitLine.vue'
+import InfoLines from '@/components/OptionsCalculator/InfoLines.vue'
 import GraphLine from '@/components/OptionsCalculator/GraphLine.vue'
 
 import { computed } from 'vue'
@@ -261,6 +262,15 @@ function calculateProfit(price: number, optionsData: OptionData) {
         :padding-y="paddingY"
         :price-scale-data="priceScaleData"
       />
+      <InfoLines
+        :width="width"
+        :height="height"
+        :padding-x="paddingX"
+        :padding-y="paddingY"
+        :meta-points="metaPoints"
+        :price-current-scale="priceCurrentScale"
+        :offset-x="offsetX"
+      />
       <GraphLine
         :width="width"
         :height="height"
@@ -283,13 +293,14 @@ function calculateProfit(price: number, optionsData: OptionData) {
 }
 .results-info {
   text-align: left;
-  padding: 1rem;
+  padding: 1rem 2rem;
   display: flex;
   gap: 1rem;
   .column {
     .text-label {
       font-size: 12px;
       color: var(--primary-text-lighter);
+      padding-bottom: 2px;
       @media screen and (max-width: 640px) {
         font-size: 10px;
       }

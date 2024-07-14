@@ -74,9 +74,10 @@ const getTopLines = computed(() => {
       const startY = getTopPolygons.value[i][j].y
       const endX = getTopPolygons.value[i][j + 1].x
       const endY = getTopPolygons.value[i][j + 1].y
-      if (startX === endX) continue
-      if (startY === 0 && endY === 0) continue
-      if (startY === props.height / 2 && endY === props.height / 2) continue
+      if (round(startX) === round(endX)) continue
+      if (round(startY) === 0 && round(endY) === 0) continue
+      if (round(startY) === round(props.height / 2) && round(endY) === round(props.height / 2))
+        continue
       line.push({
         start: { x: startX, y: startY },
         end: { x: endX, y: endY }
@@ -147,9 +148,10 @@ const getBottomLines = computed(() => {
       const startY = getBottomPolygons.value[i][j].y
       const endX = getBottomPolygons.value[i][j + 1].x
       const endY = getBottomPolygons.value[i][j + 1].y
-      if (startX === endX) continue
-      if (startY === props.height && endY === props.height) continue
-      if (startY === props.height / 2 && endY === props.height / 2) continue
+      if (round(startX) === round(endX)) continue
+      if (round(startY) === props.height && round(endY) === round(props.height)) continue
+      if (round(startY) === round(props.height / 2) && round(endY) === round(props.height / 2))
+        continue
       line.push({
         start: { x: startX, y: startY },
         end: { x: endX, y: endY }
@@ -163,6 +165,10 @@ const getBottomLines = computed(() => {
 
 function formatPoints(points: Point[]) {
   return points.map((point) => `${point.x},${point.y}`).join(' ')
+}
+
+function round(value: number) {
+  return parseFloat(value.toFixed(9))
 }
 </script>
 <template>
