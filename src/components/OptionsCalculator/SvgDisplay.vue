@@ -128,7 +128,7 @@ const priceScaleData = computed(() => {
   let closestX = centerX - (centerPrice - closestPrice) * props.priceCurrentScale
 
   lines.push({
-    price: closestPrice,
+    price: parseFloat(closestPrice.toFixed(2)),
     x: closestX,
     index: 2
   })
@@ -138,7 +138,7 @@ const priceScaleData = computed(() => {
   let index = 1
   while (currentX < width.value + props.priceStep * 1.1) {
     lines.push({
-      price: currentPrice,
+      price: parseFloat(currentPrice.toFixed(2)),
       x: currentX,
       index: index
     })
@@ -153,7 +153,7 @@ const priceScaleData = computed(() => {
   while (currentX > 0 - props.priceStep * 1.1) {
     if (currentPrice >= 0) {
       lines.push({
-        price: currentPrice,
+        price: parseFloat(currentPrice.toFixed(2)),
         x: currentX,
         index: index
       })
