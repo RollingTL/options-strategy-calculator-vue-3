@@ -20,16 +20,23 @@ const innerPriceScaleData = computed(() => {
 
 <template>
   <g>
-    <line
-      v-for="line in innerPriceScaleData"
-      :key="line.price"
-      :x1="line.x + paddingX"
-      :y1="paddingY"
-      :x2="line.x + paddingX"
-      :y2="height + paddingY"
-      class="svg-price-line"
-    />
-    <g v-for="(line, index) in innerPriceScaleData" :key="`text-${line.price}`">
+    <g v-for="(line, index) in innerPriceScaleData" :key="`text-${index}`">
+      <line
+        v-if="index % 3 == 0"
+        :x1="line.x + paddingX"
+        :y1="paddingY"
+        :x2="line.x + paddingX"
+        :y2="height + paddingY"
+        class="svg-price-line"
+      />
+      <line
+        v-else
+        :x1="line.x + paddingX"
+        :y1="paddingY"
+        :x2="line.x + paddingX"
+        :y2="height + paddingY"
+        class="svg-price-line-2"
+      />
       <g v-if="index % 3 == 0">
         <text
           :x="line.x + paddingX"
@@ -58,8 +65,12 @@ const innerPriceScaleData = computed(() => {
   stroke: var(--primary-gray-lighter);
   stroke-width: 0.5;
 }
+.svg-price-line-2 {
+  stroke: var(--primary-gray-lighter);
+  stroke-width: 0.3;
+}
 .svg-text {
   font-size: 12px;
-  fill: var(--primary-text-lighter);
+  fill: var(--primary-text-lighter-2);
 }
 </style>

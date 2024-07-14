@@ -290,8 +290,8 @@ function calculateProfit(price: number, optionsData: OptionData) {
 
 <style scoped lang="scss">
 .svg-rect {
-  stroke: var(--primary-text-lighter-2);
-  stroke-width: 1;
+  stroke: var(--primary-gray-lighter);
+  stroke-width: 0.7;
   fill: white;
 }
 .results-info {
