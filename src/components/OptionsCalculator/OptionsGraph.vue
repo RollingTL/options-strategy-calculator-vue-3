@@ -8,11 +8,11 @@ const props = defineProps<{
 const container: Ref<HTMLElement | null> = ref(null)
 const containerWidth = ref(300)
 const containerHeight = ref(480)
-const profitStep = ref(20) // pixels
-const profitScaleArray = ref([160, 80, 40, 20, 10, 4, 2, 1, 0.5])
+const profitStep = 20 // pixels
+const profitScaleArray = [160, 80, 40, 20, 10, 4, 2, 1, 0.5]
 const profitCurrentScale = ref(4) // one profit dollar is equal to profitCurrentScale pixels
-const priceStep = ref(20) // pixels
-const priceScaleArray = ref([160, 80, 40, 20, 10, 4, 2, 1, 0.5])
+const priceStep = 20 // pixels
+const priceScaleArray = [160, 80, 40, 20, 10, 4, 2, 1, 0.5]
 const priceCurrentScale = ref(4) // one profit dollar is equal to profitCurrentScale pixels
 
 const showGraph = computed(() => {
@@ -26,30 +26,30 @@ function handleResize(entries: ResizeObserverEntry[]) {
 }
 
 function incrementProfitScale() {
-  const currentIndex = profitScaleArray.value.indexOf(profitCurrentScale.value)
-  if (currentIndex < profitScaleArray.value.length - 1) {
-    profitCurrentScale.value = profitScaleArray.value[currentIndex + 1]
+  const currentIndex = profitScaleArray.indexOf(profitCurrentScale.value)
+  if (currentIndex < profitScaleArray.length - 1) {
+    profitCurrentScale.value = profitScaleArray[currentIndex + 1]
   }
 }
 
 function decrementProfitScale() {
-  const currentIndex = profitScaleArray.value.indexOf(profitCurrentScale.value)
+  const currentIndex = profitScaleArray.indexOf(profitCurrentScale.value)
   if (currentIndex > 0) {
-    profitCurrentScale.value = profitScaleArray.value[currentIndex - 1]
+    profitCurrentScale.value = profitScaleArray[currentIndex - 1]
   }
 }
 
 function incrementPriceScale() {
-  const currentIndex = priceScaleArray.value.indexOf(priceCurrentScale.value)
-  if (currentIndex < priceScaleArray.value.length - 1) {
-    priceCurrentScale.value = priceScaleArray.value[currentIndex + 1]
+  const currentIndex = priceScaleArray.indexOf(priceCurrentScale.value)
+  if (currentIndex < priceScaleArray.length - 1) {
+    priceCurrentScale.value = priceScaleArray[currentIndex + 1]
   }
 }
 
 function decrementPriceScale() {
-  const currentIndex = priceScaleArray.value.indexOf(priceCurrentScale.value)
+  const currentIndex = priceScaleArray.indexOf(priceCurrentScale.value)
   if (currentIndex > 0) {
-    priceCurrentScale.value = priceScaleArray.value[currentIndex - 1]
+    priceCurrentScale.value = priceScaleArray[currentIndex - 1]
   }
 }
 
@@ -71,7 +71,7 @@ onBeforeUnmount(() => {
   <div ref="container" class="display-container">
     <SvgDisplay
       v-if="showGraph"
-      :checked-options-data="checkedOptionsData"
+      :options-data="checkedOptionsData"
       :container-width="containerWidth"
       :container-height="containerHeight"
       :price-step="priceStep"
@@ -183,13 +183,13 @@ onBeforeUnmount(() => {
   z-index: 100;
   border-top-left-radius: 50%;
   border-bottom-left-radius: 50%;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%230F68C1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%230F68C1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" ><path d="m15 18-6-6 6-6"/></svg>');
 }
 .flat-round-button.right {
   z-index: 100;
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%230F68C1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%230F68C1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" ><path d="m9 18 6-6-6-6"/></svg>');
 }
 .flat-round-button:hover {
   box-shadow: 0 0 0 3px var(--tab-hover-color);
@@ -206,12 +206,12 @@ onBeforeUnmount(() => {
   box-shadow: 0 0 0 3px var(--tab-hover-color);
 }
 .flat-round-button.right:disabled {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23CCCCCC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23CCCCCC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" ><path d="m9 18 6-6-6-6"/></svg>');
   cursor: not-allowed;
   pointer-events: none;
 }
 .flat-round-button.left:disabled {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23CCCCCC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23CCCCCC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" ><path d="m15 18-6-6 6-6"/></svg>');
   cursor: not-allowed;
   pointer-events: none;
 }

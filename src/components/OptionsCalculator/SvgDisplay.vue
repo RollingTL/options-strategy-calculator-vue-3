@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import ProfitScale from '@/components/OptionsCalculator/ProfitScale.vue'
 import PriceScale from '@/components/OptionsCalculator/PriceScale.vue'
-import ProfitLine from '@/components/OptionsCalculator/ProfitLine.vue'
+// import ProfitLine from '@/components/OptionsCalculator/ProfitLine.vue'
+import GraphLine from '@/components/OptionsCalculator/GraphLine.vue'
 
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps<{
-  checkedOptionsData: OptionData
+  optionsData: OptionData
   containerWidth: number
   containerHeight: number
   priceStep: number
@@ -15,28 +16,112 @@ const props = defineProps<{
   priceCurrentScale: number
 }>()
 
-const paddingX = ref(60)
-const paddingY = ref(90)
+const paddingX = 60
+const paddingY = 90
 
-const width = computed(() => props.containerWidth - 2 * paddingX.value)
-const height = computed(() => props.containerHeight - 2 * paddingY.value)
+const width = computed(() => props.containerWidth - 2 * paddingX)
+const height = computed(() => props.containerHeight - 2 * paddingY)
 
-const averageOfMinMaxStrikePrices = computed(() => {
-  const checkedOptions = props.checkedOptionsData.filter((option) => option.checked)
-  if (checkedOptions.length === 0) {
-    return 0 // Return 0 if there are no checked options
+const metaPoints = computed(() => {
+  const metaPoints: MetaPoints = []
+  metaPoints.push({
+    price: 0,
+    profit: calculateProfit(0, props.optionsData),
+    type: 'zero'
+  })
+  for (let i = 0; i < props.optionsData.length; i++) {
+    if (props.optionsData[i].checked) {
+      const price = props.optionsData[i].strike_price
+      metaPoints.push({
+        price: price,
+        profit: calculateProfit(price, props.optionsData),
+        type: 'strike'
+      })
+    }
   }
-  const strikePrices = checkedOptions.map((option) => option.strike_price)
+  metaPoints.push({
+    price: 1000000,
+    profit: calculateProfit(1000000, props.optionsData),
+    type: 'million'
+  })
+
+  const newPoints: MetaPoints = []
+
+  for (let i = 0; i < metaPoints.length - 1; i++) {
+    const currentPoint = metaPoints[i]
+    const nextPoint = metaPoints[i + 1]
+    if (
+      (currentPoint.profit > 0 && nextPoint.profit < 0) ||
+      (currentPoint.profit < 0 && nextPoint.profit > 0)
+    ) {
+      // Calculate the crossing point
+      const priceDifference = nextPoint.price - currentPoint.price
+      const profitDifference = nextPoint.profit - currentPoint.profit
+      const zeroCrossingPrice =
+        currentPoint.price - currentPoint.profit * (priceDifference / profitDifference)
+
+      newPoints.push({
+        price: zeroCrossingPrice,
+        profit: 0,
+        type: 'break-point'
+      })
+    }
+  }
+  metaPoints.push(...newPoints)
+  metaPoints.sort((a, b) => a.price - b.price)
+
+  return metaPoints
+})
+
+const maxProfitLossData = computed(() => {
+  const points = metaPoints.value
+  if (points.length === 0) {
+    return { maxProfit: 0, maxLoss: 0 }
+  }
+  const profits = points.filter((point) => point.profit >= 0).map((point) => point.profit)
+  const losses = points.filter((point) => point.profit < 0).map((point) => point.profit)
+
+  let maxProfit = Math.max(...profits)
+  if (maxProfit > 100000) maxProfit = Infinity
+
+  let maxLoss = Math.min(...losses)
+  if (maxLoss < -100000) maxLoss = Infinity
+
+  return { maxProfit: maxProfit, maxLoss: maxLoss }
+})
+
+const breakPointsData = computed(() => {
+  const points = metaPoints.value
+  const breakPoints = points
+    .filter((point) => point.type === 'break-point')
+    .map((point) => point.price.toFixed(2))
+  return breakPoints.join(', ')
+})
+
+const priceCenter = computed(() => {
+  const breakPoints = metaPoints.value.filter((option) => option.type === 'break-point')
+  if (breakPoints.length > 0) {
+    return breakPoints[breakPoints.length - 1].price
+  }
+  const strikePoints = metaPoints.value.filter((option) => option.type === 'strike')
+
+  const strikePrices = strikePoints.map((option) => option.price)
   const minStrikePrice = Math.min(...strikePrices)
   const maxStrikePrice = Math.max(...strikePrices)
   return (minStrikePrice + maxStrikePrice) / 2
+})
+
+const offsetX = computed(() => {
+  const centerX = priceCenter.value * props.priceCurrentScale
+  const offsetX = centerX - width.value / 2
+  return offsetX
 })
 
 const priceScaleData = computed(() => {
   const dollarsPerScaleLine = props.priceStep / props.priceCurrentScale
   const lines: PriceScaleData = []
   const centerX = width.value / 2
-  const centerPrice = averageOfMinMaxStrikePrices.value
+  const centerPrice = priceCenter.value
 
   let closestPrice = Math.floor(centerPrice / dollarsPerScaleLine) * dollarsPerScaleLine
   let closestX = centerX - (centerPrice - closestPrice) * props.priceCurrentScale
@@ -50,7 +135,7 @@ const priceScaleData = computed(() => {
   let currentX = closestX + props.priceStep
   let currentPrice = closestPrice + (currentX - closestX) / props.priceCurrentScale
   let index = 1
-  while (currentX < width.value + props.priceStep) {
+  while (currentX < width.value + props.priceStep * 1.1) {
     lines.push({
       price: currentPrice,
       x: currentX,
@@ -64,7 +149,7 @@ const priceScaleData = computed(() => {
   currentX = closestX - props.priceStep
   currentPrice = closestPrice - (closestX - currentX) / props.priceCurrentScale
   index = 1
-  while (currentX > 0 - props.priceStep) {
+  while (currentX > 0 - props.priceStep * 1.1) {
     if (currentPrice >= 0) {
       lines.push({
         price: currentPrice,
@@ -107,10 +192,54 @@ const profitScaleData = computed(() => {
 
   return lines
 })
+
+function calculateProfit(price: number, optionsData: OptionData) {
+  let profit = 0
+  for (const option of optionsData) {
+    if (option.checked) {
+      if (option.type === 'Call') {
+        if (option.long_short === 'long') {
+          if (price <= option.strike_price) profit += 0
+          else profit += price - option.strike_price
+          profit -= option.ask
+        } else if (option.long_short === 'short') {
+          if (price <= option.strike_price) profit += 0
+          else profit -= price - option.strike_price
+          profit += option.bid
+        }
+      } else if (option.type === 'Put') {
+        if (option.long_short === 'long') {
+          if (price >= option.strike_price) profit += 0
+          else profit -= price - option.strike_price
+          profit -= option.ask
+        } else if (option.long_short === 'short') {
+          if (price >= option.strike_price) profit += 0
+          else profit += price - option.strike_price
+          profit += option.bid
+        }
+      }
+    }
+  }
+  return profit
+}
 </script>
 
 <template>
   <div>
+    <div class="results-info">
+      <div class="column">
+        <div class="text-label">Max Profit:</div>
+        <div class="profit-value">{{ maxProfitLossData.maxProfit }}</div>
+      </div>
+      <div class="column">
+        <div class="text-label">Max Loss:</div>
+        <div class="loss-value">{{ maxProfitLossData.maxLoss }}</div>
+      </div>
+      <div class="column">
+        <div class="text-label">Break Even Points:</div>
+        <div class="points-value">{{ breakPointsData }}</div>
+      </div>
+    </div>
     <svg
       :width="containerWidth"
       :height="containerHeight"
@@ -130,27 +259,62 @@ const profitScaleData = computed(() => {
         :height="height"
         :padding-x="paddingX"
         :padding-y="paddingY"
-        :price-current-scale="priceCurrentScale"
         :price-scale-data="priceScaleData"
       />
-      <ProfitLine
+      <GraphLine
         :width="width"
         :height="height"
         :padding-x="paddingX"
         :padding-y="paddingY"
+        :meta-points="metaPoints"
         :profit-current-scale="profitCurrentScale"
         :price-current-scale="priceCurrentScale"
-        :price-scale-data="priceScaleData"
-        :checked-options-data="checkedOptionsData"
+        :offset-x="offsetX"
       />
     </svg>
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .svg-rect {
-  stroke: hsla(210, 29%, 74%, 1);
+  stroke: var(--primary-text-lighter-2);
   stroke-width: 1;
   fill: white;
+}
+.results-info {
+  text-align: left;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  .column {
+    .text-label {
+      font-size: 12px;
+      color: var(--primary-text-lighter);
+      @media screen and (max-width: 640px) {
+        font-size: 10px;
+      }
+    }
+    .profit-value {
+      font-size: 18px;
+      color: var(--green-text);
+      @media screen and (max-width: 640px) {
+        font-size: 14px;
+      }
+    }
+    .loss-value {
+      font-size: 18px;
+      color: var(--red-text);
+      @media screen and (max-width: 640px) {
+        font-size: 14px;
+      }
+    }
+    .points-value {
+      font-size: 18px;
+      color: var(--primary-text-lighter);
+      @media screen and (max-width: 640px) {
+        font-size: 14px;
+      }
+    }
+  }
 }
 </style>

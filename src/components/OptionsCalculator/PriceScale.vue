@@ -6,7 +6,6 @@ const props = defineProps<{
   height: number
   paddingX: number
   paddingY: number
-  priceCurrentScale: number
   priceScaleData: PriceScaleData
 }>()
 

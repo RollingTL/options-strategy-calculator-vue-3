@@ -10,63 +10,13 @@ const props = defineProps<{
   priceCurrentScale: number
   priceScaleData: PriceScaleData
   checkedOptionsData: OptionData
+  points: Points
 }>()
 
-// const numberPadding = 8
-
-const points = computed(() => {
-  const thePoints = []
-  const centerY = props.height / 2
-  const startPrice = props.priceScaleData[0].price
-  const startX = props.priceScaleData[0].x
-
-  // Calculate start and end points
-  let profit = calculateProfit(startPrice)
-  thePoints.push({
-    price: startPrice,
-    x: startX,
-    type: 'start',
-    profit: profit,
-    y: centerY - profit * props.profitCurrentScale
-  })
-
-  const endPrice = props.priceScaleData[props.priceScaleData.length - 1].price
-  const endX = props.priceScaleData[props.priceScaleData.length - 1].x
-  profit = calculateProfit(endPrice)
-  thePoints.push({
-    price: endPrice,
-    x: endX,
-    type: 'end',
-    profit: profit,
-    y: centerY - profit * props.profitCurrentScale
-  })
-
-  // Calculate break even points
-  for (let i = 0; i < props.checkedOptionsData.length; i++) {
-    if (props.checkedOptionsData[i].checked) {
-      const price = props.checkedOptionsData[i].strike_price
-      const currentX = startX + (price - startPrice) * props.priceCurrentScale
-      profit = calculateProfit(price)
-      thePoints.push({
-        price: price,
-        x: currentX,
-        type: 'break',
-        profit: profit,
-        y: centerY - profit * props.profitCurrentScale
-      })
-    }
-  }
-
-  // Sort points by x-coordinate
-  thePoints.sort((a, b) => a.x - b.x)
-
-  return thePoints
-})
-
-const pointsFiltered = computed(() => points.value.filter((item) => item.type === 'break'))
+const pointsFiltered = computed(() => props.points.filter((item) => item.type === 'break'))
 
 const pathDataTop = computed(() => {
-  const thePoints = points.value
+  const thePoints = props.points
   if (thePoints.length === 0) return ''
   let pathData = `M ${thePoints[0].x} ${thePoints[0].y}`
   for (let i = 1; i < thePoints.length; i++) pathData += ` L ${thePoints[i].x} ${thePoints[i].y}`
@@ -76,7 +26,7 @@ const pathDataTop = computed(() => {
 })
 
 const pathDataBottom = computed(() => {
-  const thePoints = points.value
+  const thePoints = props.points
   if (thePoints.length === 0) return ''
   let pathData = `M ${thePoints[0].x} ${thePoints[0].y}`
   for (let i = 1; i < thePoints.length; i++) pathData += ` L ${thePoints[i].x} ${thePoints[i].y}`
@@ -85,7 +35,7 @@ const pathDataBottom = computed(() => {
   return pathData
 })
 
-const calculateProfit = (price) => {
+const calculateProfit = (price: number) => {
   let profit = 0
   for (const option of props.checkedOptionsData) {
     if (option.checked) {
@@ -116,7 +66,7 @@ const calculateProfit = (price) => {
 }
 
 const maxProfitLossData = computed(() => {
-  const filteredItems = points.value.filter((item) => item.type !== 'start' && item.type !== 'end')
+  const filteredItems = props.points.filter((item) => item.type !== 'start' && item.type !== 'end')
   const profits = filteredItems.map((item) => item.profit)
   const lowestProfit = Math.min(...profits)
   const highestProfit = Math.max(...profits)
@@ -129,10 +79,11 @@ const maxProfitLossData = computed(() => {
   let negativeProfits = profitsArray.filter((profit) => profit < 0)
 
   // Find maximum of positive profits
-  let maxProfit = positiveProfits.length > 0 ? Math.max(...positiveProfits) : 0
+  let maxProfit: number | 'Infinity' = positiveProfits.length > 0 ? Math.max(...positiveProfits) : 0
 
   // Find minimum of negative profits (maximum loss)
-  let maxLoss = negativeProfits.length > 0 ? Math.min(...negativeProfits) : 0
+  let maxLoss: number | 'Infinity' = negativeProfits.length > 0 ? Math.min(...negativeProfits) : 0
+
   if (maxProfit > 100000) maxProfit = 'Infinity'
   if (maxLoss < -100000) maxLoss = 'Infinity'
   else maxLoss = maxLoss * -1
@@ -142,7 +93,7 @@ const maxProfitLossData = computed(() => {
 const breakEvenPoints = computed(() => {
   const crossings = []
   const zeroLineY = props.height / 2
-  const data = points.value
+  const data = props.points
 
   for (let i = 0; i < data.length - 1; i++) {
     const p1 = data[i]
@@ -203,9 +154,9 @@ const breakEvenPoints = computed(() => {
         </mask>
 
         <!-- Linear gradients for top and bottom -->
-        <linearGradient id="gradientTop" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id="gradientTop" x1="0" y1="0" x2="0" :y2="height">
           <stop offset="0%" stop-color="rgba(204, 204, 204, 30%)" />
-          <stop offset="50%" stop-color="rgba(204, 204, 204, 0)" />
+          <stop offset="0.3%" stop-color="rgba(204, 204, 204, 0)" />
         </linearGradient>
         <linearGradient id="gradientBottom" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="50%" stop-color="rgba(204, 204, 204, 0)" />

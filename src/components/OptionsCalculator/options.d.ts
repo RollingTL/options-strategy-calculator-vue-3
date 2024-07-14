@@ -15,3 +15,20 @@ type PriceScaleData = {
   x: number
   index: number
 }[]
+type Points = {
+  price: number
+  x: number
+  type: 'start' | 'break' | 'end'
+  profit: number
+  y: number
+}[]
+type MetaPoints = {
+  price: number
+  profit: number
+  type: 'zero' | 'strike' | 'break-point' | 'million'
+}[]
+
+// type Point = {
+//   x: number
+//   y: number
+// }
