@@ -267,6 +267,7 @@ input[type='checkbox']:focus-visible {
 @media screen and (max-width: 640px) {
   .button-round {
     font-size: 12px;
+    padding: 0 11px 0 9px;
   }
   input[type='checkbox'] {
     width: 16px;

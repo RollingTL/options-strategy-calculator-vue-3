@@ -15,6 +15,5 @@ import OptionsCalculator from '@/components/OptionsCalculator.vue'
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: var(--primary-text-color);
-  margin-top: 60px;
 }
 </style>

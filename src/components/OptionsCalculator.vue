@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 import { useOptionsData } from '@/components/OptionsCalculator/useOptionsData'
 import OptionsList from '@/components/OptionsCalculator/OptionsList.vue'
@@ -64,7 +64,7 @@ function getOptionDataFromURL() {
 
 <template>
   <div>
-    <h1>Options Profit Calculator</h1>
+    <h1>Options Strategy Calculator</h1>
     <div class="container">
       <div class="calculator">
         <OptionsList
@@ -87,6 +87,14 @@ function getOptionDataFromURL() {
 </template>
 
 <style lang="scss" scoped>
+h1 {
+  padding-top: 3rem;
+  color: var(--primary-text-lighter);
+  @media screen and (max-width: 640px) {
+    padding-top: 1rem;
+    font-size: 1.6rem;
+  }
+}
 .calculator {
   max-width: 960px;
   margin: auto;
@@ -103,6 +111,9 @@ function getOptionDataFromURL() {
     display: flex;
     gap: 1rem;
     align-items: center;
+    @media screen and (max-width: 640px) {
+      padding-left: 1rem;
+    }
     .label {
       font-size: 14px;
     }
