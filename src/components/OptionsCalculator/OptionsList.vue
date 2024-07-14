@@ -168,7 +168,7 @@ tr.off td {
   border-radius: 11px;
   font-size: 16px;
   line-height: 1.4;
-  padding: 0 11px;
+  padding: 0 13px 2px 11px;
   text-transform: capitalize;
   transition:
     border-color 0.3s,

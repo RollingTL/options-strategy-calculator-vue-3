@@ -51,8 +51,8 @@ const zeroPoint = computed(() => {
   <g :transform="`translate(${paddingX}, ${paddingY})`">
     {{ breakPoints }}
     <line
-      v-for="item in breakPoints"
-      :key="item"
+      v-for="(item, index) in breakPoints"
+      :key="'break' + index"
       :x1="item"
       :y1="0"
       :x2="item"
@@ -60,8 +60,8 @@ const zeroPoint = computed(() => {
       class="break-line"
     />
     <line
-      v-for="item in strikePoints"
-      :key="item"
+      v-for="(item, index) in strikePoints"
+      :key="'strike' + index"
       :x1="item"
       :y1="0"
       :x2="item"
@@ -69,8 +69,8 @@ const zeroPoint = computed(() => {
       class="strike-line"
     />
     <line
-      v-for="item in zeroPoint"
-      :key="item"
+      v-for="(item, index) in zeroPoint"
+      :key="'zero' + index"
       :x1="item"
       :y1="0"
       :x2="item"
