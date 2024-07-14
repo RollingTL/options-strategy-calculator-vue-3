@@ -24,6 +24,8 @@ const width = computed(() => props.containerWidth - 2 * paddingX)
 const height = computed(() => props.containerHeight - 2 * paddingY)
 
 const metaPoints = computed(() => {
+  console.log('optionsData', props.optionsData)
+
   const metaPoints: MetaPoints = []
   metaPoints.push({
     price: 0,
@@ -46,15 +48,20 @@ const metaPoints = computed(() => {
     type: 'million'
   })
 
+  console.log('metaPoints', metaPoints, metaPoints.length)
+  //////////////////
   const newPoints: MetaPoints = []
 
   for (let i = 0; i < metaPoints.length - 1; i++) {
     const currentPoint = metaPoints[i]
     const nextPoint = metaPoints[i + 1]
+    console.log('----', currentPoint.profit, nextPoint.profit)
+
     if (
       (currentPoint.profit > 0 && nextPoint.profit < 0) ||
       (currentPoint.profit < 0 && nextPoint.profit > 0)
     ) {
+      console.log('----')
       // Calculate the crossing point
       const priceDifference = nextPoint.price - currentPoint.price
       const profitDifference = nextPoint.profit - currentPoint.profit
@@ -68,8 +75,12 @@ const metaPoints = computed(() => {
       })
     }
   }
+  ///////////////////
+  console.log('newPoints', newPoints)
+
   metaPoints.push(...newPoints)
   metaPoints.sort((a, b) => a.price - b.price)
+  console.log('metaPoints final', metaPoints)
 
   return metaPoints
 })

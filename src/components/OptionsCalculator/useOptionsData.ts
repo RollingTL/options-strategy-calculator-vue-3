@@ -46,7 +46,10 @@ export function useOptionsData() {
   } else {
     optionsData.value = defaultData
   }
-
+  const setOptionsData = (data: OptionData) => {
+    optionsData.value = JSON.parse(JSON.stringify(data))
+    localStorage.setItem('optionsData', JSON.stringify(optionsData.value))
+  }
   const toggleChecked = (index: number) => {
     if (optionsData.value[index]) {
       optionsData.value[index].checked = !optionsData.value[index].checked
@@ -91,6 +94,7 @@ export function useOptionsData() {
 
   return {
     optionsData,
+    setOptionsData,
     toggleChecked,
     toggleCallPut,
     toggleLongShort,

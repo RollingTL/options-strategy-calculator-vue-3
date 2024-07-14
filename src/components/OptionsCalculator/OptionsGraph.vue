@@ -185,13 +185,13 @@ onBeforeUnmount(() => {
   z-index: 100;
   border-top-left-radius: 50%;
   border-bottom-left-radius: 50%;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234d7ee0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" ><path d="m15 18-6-6 6-6"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234d7ee0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m15 18-6-6 6-6"/></svg>');
 }
 .flat-round-button.right {
   z-index: 100;
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234d7ee0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" ><path d="m9 18 6-6-6-6"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234d7ee0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m9 18 6-6-6-6"/></svg>');
 }
 .flat-round-button:hover {
   box-shadow: 0 0 0 3px var(--tab-hover-color);
@@ -208,12 +208,12 @@ onBeforeUnmount(() => {
   box-shadow: 0 0 0 3px var(--tab-hover-color);
 }
 .flat-round-button.right:disabled {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23CCCCCC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" ><path d="m9 18 6-6-6-6"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m9 18 6-6-6-6"/></svg>');
   cursor: not-allowed;
   pointer-events: none;
 }
 .flat-round-button.left:disabled {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23CCCCCC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" ><path d="m15 18-6-6 6-6"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23CCCCCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m15 18-6-6 6-6"/></svg>');
   cursor: not-allowed;
   pointer-events: none;
 }
