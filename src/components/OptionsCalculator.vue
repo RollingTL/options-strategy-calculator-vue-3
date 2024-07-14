@@ -82,7 +82,7 @@ const updateAsk = (newValue: number, index: number) => {
   <div>
     <h1>Options Profit Calculator</h1>
     <div class="container">
-      <div class="calculator" v-if="optionsData.length > 0">
+      <div class="calculator">
         <OptionsList
           :options-data="optionsData"
           @option-clicked="toggleChecked"
@@ -94,7 +94,6 @@ const updateAsk = (newValue: number, index: number) => {
         />
         <OptionsGraph :checked-options-data="optionsData" />
       </div>
-      <div class="warning" v-else>Invalid data!</div>
     </div>
   </div>
 </template>
@@ -109,12 +108,5 @@ const updateAsk = (newValue: number, index: number) => {
   border-radius: 1rem;
   padding-bottom: 1rem;
   /* padding-top: 1rem; */
-}
-.warning {
-  max-width: 960px;
-  margin: auto;
-}
-.info {
-  text-align: left;
 }
 </style>

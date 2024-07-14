@@ -113,11 +113,13 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </div>
-    <div class="warning" v-if="!showGraph">Select at least one option to display results!</div>
+    <div class="warning" v-if="!showGraph">
+      <div class="text">Select at least one option to display results!</div>
+    </div>
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .display-container {
   padding-top: 1.6rem;
 }
@@ -215,8 +217,16 @@ onBeforeUnmount(() => {
   cursor: not-allowed;
   pointer-events: none;
 }
+
 .warning {
-  height: 507px;
-  color: var(--warning-color);
+  max-width: 960px;
+  display: flex;
+  margin: auto;
+  height: 480px;
+  align-items: center;
+  justify-content: center;
+  .text {
+    color: var(--warning-color);
+  }
 }
 </style>
