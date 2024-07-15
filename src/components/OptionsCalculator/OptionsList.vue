@@ -194,9 +194,11 @@ tr.off td {
   border: 1px solid var(--red-medium);
   background-color: var(--red-light-accent);
 }
-.button-round:hover {
-  box-shadow: 0 0 0 3px var(--tab-hover-color);
-  transform: scale(1.1);
+@media (hover: hover) {
+  .button-round:hover {
+    box-shadow: 0 0 0 3px var(--tab-hover-color);
+    transform: scale(1.1);
+  }
 }
 
 .button-round:active {

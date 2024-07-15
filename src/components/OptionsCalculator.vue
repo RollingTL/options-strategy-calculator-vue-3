@@ -145,10 +145,11 @@ h1 {
 
       background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234d7ee0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>');
     }
-
-    .flat-round-button:hover {
-      box-shadow: 0 0 0 3px var(--tab-hover-color);
-      transform: scale(1.1);
+    @media (hover: hover) {
+      .flat-round-button:hover {
+        box-shadow: 0 0 0 3px var(--tab-hover-color);
+        transform: scale(1.1);
+      }
     }
 
     .flat-round-button:active {
@@ -182,6 +183,7 @@ h1 {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 16px;
+    outline: none;
 
     cursor: pointer;
     transition:
@@ -192,14 +194,16 @@ h1 {
     background-color: transparent;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234d7ee0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>');
 
-    &:hover {
-      box-shadow: 0 0 0 3px var(--tab-hover-color);
-      transform: scale(1.1);
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: 0 0 0 3px var(--tab-hover-color);
+        transform: scale(1.1);
+      }
     }
-
     &:active {
       outline: none;
       transform: scale(0.95);
+      box-shadow: none;
     }
 
     &:focus-visible {
