@@ -57,7 +57,7 @@ const isValid = (value: string) => {
 <style lang="scss" scoped>
 input[type='text'] {
   width: 100px;
-  padding: 4px;
+  padding: 4px 6px;
   // font-family: 'Courier New', Courier, monospace;
   // font-weight: 600;
   font-size: 16px;
@@ -81,7 +81,12 @@ input[type='text']:focus-visible {
   box-shadow: 0 0 0 3px var(--tab-hover-color);
   border-bottom: 1px solid transparent;
   outline: none;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--red-light-input);
+}
+.call {
+  input[type='text']:focus-visible {
+    background-color: var(--green-light-input);
+  }
 }
 
 input[type='text']::placeholder {

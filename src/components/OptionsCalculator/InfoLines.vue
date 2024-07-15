@@ -81,7 +81,7 @@ const zeroPoint = computed(() => {
 </template>
 <style scoped>
 .break-line {
-  stroke: var(--warning-color);
+  stroke: var(--red-line);
   stroke-width: 1;
 }
 .strike-line {

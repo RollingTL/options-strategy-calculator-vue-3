@@ -4,6 +4,8 @@ import { computed } from 'vue'
 import { useOptionsData } from '@/components/OptionsCalculator/useOptionsData'
 import OptionsList from '@/components/OptionsCalculator/OptionsList.vue'
 import OptionsGraph from '@/components/OptionsCalculator/OptionsGraph.vue'
+import { useDarkMode } from '@/composables/useDarkMode'
+const { isDarkMode, toggleDarkMode } = useDarkMode()
 
 const {
   optionsData,
@@ -61,24 +63,25 @@ function getOptionDataFromURL() {
 </script>
 
 <template>
-  <div>
-    <h1>Options Strategy Calculator</h1>
-    <div class="container">
-      <div class="calculator">
-        <OptionsList
-          :options-data="optionsData"
-          @option-clicked="toggleChecked"
-          @swap-call-put="toggleCallPut"
-          @swap-long-short="toggleLongShort"
-          @update-strike-price="updateStrikePrice"
-          @update-bid="updateBid"
-          @update-ask="updateAsk"
-        />
-        <OptionsGraph :checked-options-data="optionsData" />
-        <div v-if="showCopyButton" class="url-button">
-          <div class="label">Copy URL with current Options data:</div>
-          <button class="flat-round-button" @click="copyToClipboard"></button>
-        </div>
+  <div class="mode-holder">
+    <button class="mode-button" :class="{ dark: isDarkMode }" @click="toggleDarkMode"></button>
+  </div>
+  <h1>Options Strategy Calculator</h1>
+  <div class="container">
+    <div class="calculator">
+      <OptionsList
+        :options-data="optionsData"
+        @option-clicked="toggleChecked"
+        @swap-call-put="toggleCallPut"
+        @swap-long-short="toggleLongShort"
+        @update-strike-price="updateStrikePrice"
+        @update-bid="updateBid"
+        @update-ask="updateAsk"
+      />
+      <OptionsGraph :checked-options-data="optionsData" />
+      <div v-if="showCopyButton" class="url-button">
+        <div class="label">Copy URL with current Options data:</div>
+        <button class="flat-round-button" @click="copyToClipboard"></button>
       </div>
     </div>
   </div>
@@ -86,10 +89,13 @@ function getOptionDataFromURL() {
 
 <style lang="scss" scoped>
 h1 {
-  padding-top: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  margin: 0;
   color: var(--primary-text-lighter);
+  font-weight: 400;
   @media screen and (max-width: 640px) {
-    padding-top: 1rem;
+    padding-top: 0.5rem;
     font-size: 1.6rem;
   }
 }
@@ -97,6 +103,7 @@ h1 {
   max-width: 960px;
   margin: auto;
   margin-bottom: 2rem;
+  background-color: var(--applet-background-color);
   box-shadow:
     0 0 5px var(--shadow-narrow),
     0 0 20px var(--shadow-wide);
@@ -115,15 +122,14 @@ h1 {
     }
     .label {
       font-size: 14px;
+      color: var(--primary-text-lighter);
     }
     .flat-round-button {
-      --button-background-color: #3498db;
-
       width: 28px;
       height: 28px;
       border: 1px solid var(--primary-gray-lighter);
       border-radius: 5px;
-      background-color: white;
+      background-color: var(--applet-background-color);
 
       background-repeat: no-repeat;
       background-position: center;
@@ -153,6 +159,55 @@ h1 {
     .flat-round-button:focus-visible {
       outline: none;
       box-shadow: 0 0 0 3px var(--tab-hover-color);
+    }
+  }
+}
+.mode-holder {
+  max-width: 960px;
+  box-sizing: border-box;
+  margin: auto;
+  text-align: right;
+  padding: 0 1.2rem;
+  // border: 1px solid red;
+  @media screen and (max-width: 640px) {
+    padding: 0 0.4rem;
+  }
+  .mode-button {
+    width: 28px;
+    height: 28px;
+    // border: 1px solid var(--primary-gray-lighter);
+    border: none;
+    border-radius: 5px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
+
+    cursor: pointer;
+    transition:
+      background-color 0.3s,
+      transform 0.2s;
+
+    z-index: 100;
+    background-color: transparent;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234d7ee0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>');
+
+    &:hover {
+      box-shadow: 0 0 0 3px var(--tab-hover-color);
+      transform: scale(1.1);
+    }
+
+    &:active {
+      outline: none;
+      transform: scale(0.95);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px var(--tab-hover-color);
+    }
+    &.dark {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234d7ee0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>');
     }
   }
 }

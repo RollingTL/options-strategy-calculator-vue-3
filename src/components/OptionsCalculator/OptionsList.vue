@@ -231,7 +231,7 @@ input[type='checkbox'] {
   border: 1px solid var(--primary-gray);
   border-radius: 5px;
   appearance: none;
-  background-color: white;
+  background-color: var(--primary-background-light);
   outline: none;
   transition: outline 0.1s;
 }

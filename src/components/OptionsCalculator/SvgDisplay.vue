@@ -292,7 +292,7 @@ function calculateProfit(price: number, optionsData: OptionData) {
 .svg-rect {
   stroke: var(--primary-gray-lighter);
   stroke-width: 0.7;
-  fill: white;
+  fill: var(--applet-background-color);
 }
 .results-info {
   text-align: left;

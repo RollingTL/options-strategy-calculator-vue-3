@@ -1,4 +1,8 @@
 :root {
+  --page-background-color: hsl(170, 16%, 95%);
+  --applet-background-color: white;
+
+
   --primary-text-color: hsl(210, 27%, 24%);
   --primary-text-lighter: hsl(210, 29%, 34%);
   --primary-text-lighter-2: hsl(210, 22%, 54%);
@@ -18,8 +22,14 @@
   --green-text: hsla(170, 80%, 29%, 1);
   --red-text: hsla(344, 80%, 39%, 1);
 
+  --green-line: hsla(170, 80%, 39%, 1);
+  --red-line: hsla(344, 80%, 49%, 1);
+
   --green-light: hsla(170, 94%, 46%, 0.1);
-  --red-light: hsla(354, 100%, 79%, 0.2);
+  --red-light: hsla(344, 100%, 79%, 0.2);
+
+  --green-light-input: hsla(170, 94%, 98%, 1);
+  --red-light-input: hsla(344, 100%, 98%, 1);
 
   --green-dark: hsla(170, 44%, 31%, 1);
   --red-dark: hsla(344, 30%, 33%, 1);
@@ -41,4 +51,56 @@
   /* convert below color to to svg %____ and change fill color in svg */
   --marker-color-hsla: hsla(210, 79%, 39%, 1);
   --marker-color-rgb: #4d7ee0;
+}
+
+.dark-mode {
+  --page-background-color: hsl(170, 16%, 5%);
+  --applet-background-color: hsl(210, 16%, 15%);
+
+  --primary-text-color: hsl(210, 27%, 84%);
+  --primary-text-lighter: hsl(210, 29%, 74%);
+
+
+  --primary-gray: hsla(210, 19%, 29%, 1);
+  --primary-gray-lighter: hsla(210, 19%, 26%, 1);
+  --primary-gray-lighter-2: hsla(210, 19%, 8%, 1); //
+
+
+  --primary-text-disabled: hsla(210, 19%, 24%, 1); //
+  --primary-background-disabled: hsla(210, 19%, 10%, 0); //
+
+  --primary-background-light: hsla(210, 29%, 11%, 1);
+
+  --green-text: hsla(170, 80%, 59%, 1);
+  --red-text: hsla(344, 80%, 59%, 1);
+
+  --green-line: hsla(170, 80%, 39%, 1);
+  --red-line: hsla(344, 80%, 49%, 1);
+
+  --green-light-input: hsla(170, 80%, 9%, 1);
+  --red-light-input: hsla(344, 80%, 9%, 1);
+
+  --green-dark: hsla(170, 34%, 71%, 1);
+  --red-dark: hsla(344, 30%, 71%, 1);
+
+  --green-medium: hsla(170, 24%, 30%, 1);
+  --red-medium: hsla(344, 20%, 30%, 1);
+
+  --green-light: hsla(170, 80%, 11%, 1);
+  --red-light: hsla(344, 80%, 16%, 1);
+
+  --green-light-accent: hsla(160, 85%, 22%, 1);
+  --red-light-accent: hsla(344, 85%, 22%, 1);
+
+
+  --shadow-narrow: hsla(210, 24%, 0%, 0.7);
+  --shadow-wide: hsla(170, 45%, 0%, 0.5);
+}
+
+body {
+  background-color: var(--page-background-color);
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--primary-text-color);
 }

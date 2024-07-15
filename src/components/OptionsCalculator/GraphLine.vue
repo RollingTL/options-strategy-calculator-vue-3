@@ -175,12 +175,12 @@ function round(value: number) {
 </script>
 <template>
   <linearGradient id="gradientTop" x1="0" x2="0" y1="0" y2="1">
-    <stop offset="0%" stop-color="hsla(180, 50%, 59%, 40%)" />
-    <stop offset="100%" stop-color="hsla(180, 50%, 59%, 0%)" />
+    <stop offset="0%" stop-color="hsla(160, 70%, 40%, 30%)" />
+    <stop offset="100%" stop-color="hsla(160, 70%, 40%, 0%)" />
   </linearGradient>
   <linearGradient id="gradientBottom" x1="0" x2="0" y1="0" y2="1">
-    <stop offset="0%" stop-color="hsla(354, 80%, 69%, 0%)" />
-    <stop offset="100%" stop-color="hsla(354, 80%, 69%, 40%)" />
+    <stop offset="0%" stop-color="hsla(360, 80%, 40%, 0%)" />
+    <stop offset="100%" stop-color="hsla(360, 80%, 40%, 30%)" />
   </linearGradient>
   <g :transform="`translate(${paddingX}, ${paddingY})`">
     <g v-for="(polygon, index) in getTopPolygons" :key="index">
@@ -193,8 +193,7 @@ function round(value: number) {
           :y1="segment.start.y"
           :x2="segment.end.x"
           :y2="segment.end.y"
-          stroke="hsla(165, 80%, 49%, 100%)"
-          stroke-width="2"
+          class="profit-line"
         />
       </g>
     </g>
@@ -208,10 +207,20 @@ function round(value: number) {
           :y1="segment.start.y"
           :x2="segment.end.x"
           :y2="segment.end.y"
-          stroke="hsla(350, 90%, 69%, 100%)"
-          stroke-width="2"
+          class="loss-line"
         />
       </g>
     </g>
   </g>
 </template>
+
+<style scoped lang="scss">
+.profit-line {
+  stroke: var(--green-line);
+  stroke-width: 2;
+}
+.loss-line {
+  stroke: var(--red-line);
+  stroke-width: 2;
+}
+</style>

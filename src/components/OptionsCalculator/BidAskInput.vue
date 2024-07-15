@@ -91,7 +91,7 @@ const isValidAsk = (value: string) => {
     maxlength="16"
     :disabled="readonly"
   />
-  <span>Ask:</span>
+  <span class="second">Ask:</span>
   <input
     ref="askRef"
     :value="currentAsk"
@@ -110,7 +110,7 @@ const isValidAsk = (value: string) => {
 <style lang="scss" scoped>
 input[type='text'] {
   width: 80px;
-  padding: 4px;
+  padding: 4px 6px;
   // font-family: 'Courier New', Courier, monospace;
   // font-weight: 600;
   font-size: 16px;
@@ -134,7 +134,12 @@ input[type='text']:focus-visible {
   box-shadow: 0 0 0 3px var(--tab-hover-color);
   border-bottom: 1px solid transparent;
   outline: none;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--red-light-input);
+}
+.call {
+  input[type='text']:focus-visible {
+    background-color: var(--green-light-input);
+  }
 }
 
 input[type='text']::placeholder {
@@ -149,11 +154,12 @@ input[type='text']:disabled {
 
 span {
   font-size: 14px;
+
   color: var(--red-dark);
   font-weight: 100;
   padding-right: 3px;
-  :nth-child(1) {
-    padding-left: 7px;
+  &.second {
+    padding-left: 9px;
   }
 }
 

@@ -170,7 +170,7 @@ onBeforeUnmount(() => {
   height: 24px;
   border: 1px solid var(--primary-gray-lighter);
 
-  background-color: white;
+  background-color: var(--applet-background-color);
 
   background-repeat: no-repeat;
   background-position: center;
