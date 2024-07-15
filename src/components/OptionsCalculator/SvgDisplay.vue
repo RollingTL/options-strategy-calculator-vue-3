@@ -40,8 +40,8 @@ const metaPoints = computed(() => {
     }
   }
   metaPoints.push({
-    price: 1000000,
-    profit: calculateProfit(1000000, props.optionsData),
+    price: 100000,
+    profit: calculateProfit(100000, props.optionsData),
     type: 'million'
   })
 
@@ -86,10 +86,10 @@ const maxProfitLossData = computed(() => {
   const losses = points.filter((point) => point.profit < 0).map((point) => point.profit)
 
   let maxProfit = Math.max(...profits)
-  if (maxProfit > 100000) maxProfit = Infinity
+  if (maxProfit > 10000) maxProfit = Infinity
 
   let maxLoss = Math.min(...losses)
-  if (maxLoss < -100000) maxLoss = Infinity
+  if (maxLoss < -10000) maxLoss = Infinity
 
   return { maxProfit: parseFloat(maxProfit.toFixed(3)), maxLoss: parseFloat(maxLoss.toFixed(3)) }
 })

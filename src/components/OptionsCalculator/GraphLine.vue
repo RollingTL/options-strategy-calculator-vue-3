@@ -18,6 +18,8 @@ const props = defineProps<{
 }>()
 
 const getTopPolygons = computed(() => {
+  console.log('metaPoints', props.metaPoints)
+
   const polygon: Point[] = []
   for (let i = 0; i < props.metaPoints.length; i++) {
     const point = props.metaPoints[i]
@@ -33,14 +35,14 @@ const getTopPolygons = computed(() => {
   polygon.push(
     new Point(
       pointBottomRight.price * props.priceCurrentScale - props.offsetX,
-      props.height / 2 + 1000000 * props.profitCurrentScale
+      props.height / 2 + 100000 * props.profitCurrentScale
     )
   )
 
   polygon.push(
     new Point(
       0 * props.priceCurrentScale - props.offsetX,
-      props.height / 2 + 1000000 * props.profitCurrentScale
+      props.height / 2 + 100000 * props.profitCurrentScale
     )
   )
   const pointClose = props.metaPoints[0]
@@ -106,14 +108,14 @@ const getBottomPolygons = computed(() => {
   polygon.push(
     new Point(
       pointBottomRight.price * props.priceCurrentScale - props.offsetX,
-      props.height / 2 - 1000000 * props.profitCurrentScale
+      props.height / 2 - 100000 * props.profitCurrentScale
     )
   )
 
   polygon.push(
     new Point(
       0 * props.priceCurrentScale - props.offsetX,
-      props.height / 2 - 1000000 * props.profitCurrentScale
+      props.height / 2 - 100000 * props.profitCurrentScale
     )
   )
   const pointClose = props.metaPoints[0]
