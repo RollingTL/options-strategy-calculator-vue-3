@@ -44,7 +44,7 @@ const metaPoints = computed(() => {
     profit: calculateProfit(100000, props.optionsData),
     type: 'million'
   })
-
+  metaPoints.sort((a, b) => a.price - b.price)
   //////////////////
   const newPoints: MetaPoints = []
 
