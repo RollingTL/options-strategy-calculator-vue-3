@@ -175,12 +175,12 @@ function round(value: number) {
 </script>
 <template>
   <linearGradient id="gradientTop" x1="0" x2="0" y1="0" y2="1">
-    <stop offset="0%" stop-color="hsla(170, 80%, 59%, 30%)" />
-    <stop offset="100%" stop-color="hsla(170, 80%, 59%, 0%)" />
+    <stop offset="0%" stop-color="hsla(180, 50%, 59%, 40%)" />
+    <stop offset="100%" stop-color="hsla(180, 50%, 59%, 0%)" />
   </linearGradient>
   <linearGradient id="gradientBottom" x1="0" x2="0" y1="0" y2="1">
-    <stop offset="0%" stop-color="hsla(344, 80%, 69%, 0%)" />
-    <stop offset="100%" stop-color="hsla(344, 80%, 69%, 30%)" />
+    <stop offset="0%" stop-color="hsla(354, 80%, 69%, 0%)" />
+    <stop offset="100%" stop-color="hsla(354, 80%, 69%, 40%)" />
   </linearGradient>
   <g :transform="`translate(${paddingX}, ${paddingY})`">
     <g v-for="(polygon, index) in getTopPolygons" :key="index">
