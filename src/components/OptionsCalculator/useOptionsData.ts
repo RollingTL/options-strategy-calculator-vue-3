@@ -3,34 +3,34 @@ import { ref } from 'vue'
 // Define your initial data
 const defaultData: OptionData = [
   {
-    strike_price: 420,
+    strike_price: 137,
     type: 'Call',
-    bid: 25.75,
-    ask: 26.0,
+    bid: 8.6,
+    ask: 9,
     long_short: 'long',
     checked: true
   },
   {
-    strike_price: 425,
+    strike_price: 145,
     type: 'Call',
-    bid: 23.5,
-    ask: 23.75,
+    bid: 5.5,
+    ask: 6,
     long_short: 'long',
     checked: true
   },
   {
-    strike_price: 420,
+    strike_price: 120,
     type: 'Put',
-    bid: 21.3,
-    ask: 21.55,
+    bid: 6.3,
+    ask: 6.5,
     long_short: 'short',
     checked: true
   },
   {
-    strike_price: 425,
+    strike_price: 127,
     type: 'Put',
-    bid: 23.4,
-    ask: 23.7,
+    bid: 9.7,
+    ask: 9.9,
     long_short: 'long',
     checked: true
   }
