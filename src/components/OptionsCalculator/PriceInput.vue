@@ -97,6 +97,7 @@ input[type='text']:disabled {
   background-color: transparent;
   border-bottom: 1px solid var(--primary-text-disabled);
   color: var(--primary-text-disabled);
+  -webkit-text-fill-color: var(--primary-text-disabled);
 }
 
 @media screen and (max-width: 640px) {
